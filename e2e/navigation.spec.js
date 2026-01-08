@@ -21,8 +21,8 @@ test.describe('Navigation and Page Routing', () => {
     await expect(contents).toBeVisible();
 
     // Verify specific section content
-    const dddemDescription = page.locator(
-      'text=The East Midlands tech scene was incredibly diverse'
+    const dddemDescription = page.getByText(
+      /The East Midlands tech scene was incredibly diverse/
     );
     await expect(dddemDescription).toBeVisible();
   });
@@ -37,7 +37,7 @@ test.describe('Navigation and Page Routing', () => {
     await expect(page).toHaveTitle(/Agenda/);
 
     // Check for header
-    const header = page.locator('text=Agenda');
+    const header = page.getByText(/Agenda/);
     await expect(header).toBeVisible();
   });
 
@@ -61,8 +61,8 @@ test.describe('Navigation and Page Routing', () => {
     await expect(votingHeading).toBeVisible();
 
     // Verify desktop recommendation message
-    const desktopMessage = page.locator(
-      'text=We advise using this page on desktop'
+    const desktopMessage = page.getByText(
+      /We advise using this page on desktop/
     );
     await expect(desktopMessage).toBeVisible();
   });

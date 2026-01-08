@@ -5,10 +5,10 @@ test.describe('Sponsor Pages', () => {
     await page.goto('/sponsor/sponsorship-tiers');
 
     // Verify page title
-    await expect(page).toHaveTitle(/Sponsorship Tiers/);
+    await expect(page).toHaveTitle(/Sponsorship Tiers 2023/);
 
     // Check for main heading
-    const heading = page.locator('text=Sponsorship Tiers 2023');
+    const heading = page.getByText(/Sponsorship Tiers 2023/);
     await expect(heading).toBeVisible();
   });
 
@@ -76,7 +76,7 @@ test.describe('Sponsor Pages', () => {
     await page.goto('/sponsor/why-sponsor');
 
     // Verify page loaded
-    const heading = page.locator('text=Why Sponsor').first();
+    const heading = page.getByText(/Why Sponsor/).first();
     await expect(heading).toBeVisible();
   });
 
@@ -109,7 +109,7 @@ test.describe('Sponsor Pages', () => {
     await page.goto('/sponsor/testimonials');
 
     // Verify page loaded
-    const heading = page.locator('text=Testimonials').first();
+    const heading = page.getByText(/Testimonials/).first();
     await expect(heading).toBeVisible();
   });
 
@@ -117,7 +117,7 @@ test.describe('Sponsor Pages', () => {
     await page.goto('/sponsor/social-responsibility');
 
     // Verify page loaded
-    const heading = page.locator('text=Social Responsibility').first();
+    const heading = page.getByText(/Social Responsibility/).first();
     await expect(heading).toBeVisible();
   });
 });

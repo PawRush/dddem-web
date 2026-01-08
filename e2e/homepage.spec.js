@@ -18,11 +18,11 @@ test.describe('Homepage', () => {
     await page.goto('/');
 
     // Check for main description section
-    const mainDescription = page.locator('text=DDD East Midlands was an inclusive');
+    const mainDescription = page.getByText(/DDD East Midlands was an inclusive/);
     await expect(mainDescription).toBeVisible();
 
     // Check for event status section
-    const eventStatus = page.locator('text=Event on hold indefinitely');
+    const eventStatus = page.getByText(/Event on hold indefinitely/);
     await expect(eventStatus).toBeVisible();
 
     // Check for principles section
@@ -32,19 +32,19 @@ test.describe('Homepage', () => {
     await expect(principlesHeading).toBeVisible();
 
     // Check for DDD principles list items
-    const saturdayPrinciple = page.locator(
-      'text=The event was hosted on a Saturday'
+    const saturdayPrinciple = page.getByText(
+      /The event was hosted on a Saturday/
     );
     await expect(saturdayPrinciple).toBeVisible();
 
-    const freeTickets = page.locator(
-      'text=Tickets to attend the event were free'
+    const freeTickets = page.getByText(
+      /Tickets to attend the event were free/
     );
     await expect(freeTickets).toBeVisible();
 
     // Check for additional principles
-    const anonymousSubmissions = page.locator(
-      'text=All talk submissions were anonymous'
+    const anonymousSubmissions = page.getByText(
+      /All talk submissions were anonymous/
     );
     await expect(anonymousSubmissions).toBeVisible();
   });
