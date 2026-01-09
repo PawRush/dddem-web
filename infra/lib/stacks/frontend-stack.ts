@@ -24,16 +24,22 @@ export class FrontendStack extends cdk.Stack {
     const urlRewriteFunction = new cloudfront.Function(this, "UrlRewriteFunction", {
       code: cloudfront.FunctionCode.fromInline(`
         function handler(event) {
-          const request = event.request;
-          let uri = request.uri;
-          if (!uri.includes('.')) {
-            if (!uri.endsWith('/')) uri += '/';
-            request.uri = uri + 'index.html';
+          var request = event.request;
+          var uri = request.uri;
+          // Skip if requesting a file (has extension)
+          if (uri.includes('.')) {
+            return request;
           }
+          // Skip if already requesting a directory
+          if (uri.endsWith('/')) {
+            return request;
+          }
+          // Add trailing slash for directories
+          request.uri = uri + '/';
           return request;
         }
       `),
-      comment: "Rewrites /path to /path/index.html",
+      comment: "Adds trailing slash to directory-like paths",
     });
 
     const cloudfrontToS3 = new CloudFrontToS3(this, "CFToS3", {
