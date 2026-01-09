@@ -26,20 +26,25 @@ export class FrontendStack extends cdk.Stack {
         function handler(event) {
           var request = event.request;
           var uri = request.uri;
-          // Skip if requesting a file (has extension)
+          // If requesting a file with extension, pass through
           if (uri.includes('.')) {
             return request;
           }
-          // Skip if already requesting a directory
-          if (uri.endsWith('/')) {
+          // If requesting root, let CloudFront handle via defaultRootObject
+          if (uri === '/') {
             return request;
           }
-          // Add trailing slash for directories
-          request.uri = uri + '/';
+          // If path ends with slash, append index.html
+          if (uri.endsWith('/')) {
+            request.uri = uri + 'index.html';
+          } else {
+            // No trailing slash, no extension - treat as directory and add index.html
+            request.uri = uri + '/index.html';
+          }
           return request;
         }
       `),
-      comment: "Adds trailing slash to directory-like paths",
+      comment: "Rewrites directory requests to index.html",
     });
 
     const cloudfrontToS3 = new CloudFrontToS3(this, "CFToS3", {
