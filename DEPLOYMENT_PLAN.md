@@ -6,7 +6,7 @@ app_name: DDDEMWeb
 app_type: Frontend Application (Next.js Static Export)
 branch: deploy-to-aws
 created: 2026-01-09T23:00:00Z
-last_updated: 2026-01-10T00:30:00Z
+last_updated: 2026-01-10T01:30:00Z
 ---
 
 # Deployment Plan: DDD East Midlands Web
@@ -30,8 +30,8 @@ Coding Agents should follow this Deployment Plan and validate previous progress 
 - [x] Step 9: Validate CDK Synth
 
 ## Phase 3: Deploy and Validate
-- [ ] Step 10: Execute CDK Deployment
-- [ ] Step 11: Validate CloudFormation Stack
+- [x] Step 10: Execute CDK Deployment
+- [x] Step 11: Validate CloudFormation Stack
 
 ## Phase 4: Update Documentation
 - [ ] Step 12: Finalize Deployment Plan
@@ -39,10 +39,12 @@ Coding Agents should follow this Deployment Plan and validate previous progress 
 
 ## Deployment Info
 
-- Deployment URL: [pending]
-- Stack name: DDDEMWebFrontend-preview-[username]
-- Distribution ID: [pending]
-- S3 bucket names: [pending]
+- Deployment URL: https://d12q89g94187ud.cloudfront.net
+- Stack name: DDDEMWebFrontend-preview-jairosp
+- Distribution ID: E2H0FYMEIONZAR
+- S3 bucket (content): dddemwebfrontend-preview-ja-cftos3s3bucketcae9f2be-gp0rhb0n9zud
+- S3 bucket (S3 logs): dddemwebfrontend-preview--cftos3s3loggingbucket64b-zyvm9gwxw9ec
+- S3 bucket (CloudFront logs): dddemwebfrontend-preview--cftos3cloudfrontloggingb-9yhkeuk1og7x
 - Build output directory: `out/`
 - Build command: `npm run build`
 - Framework: Next.js (static export with trailing slashes)
@@ -84,5 +86,5 @@ None yet.
 
 ### Session 1 - 2026-01-09T23:00:00Z
 Agent: claude-haiku-4-5-20251001-v1:0
-Progress: Completed Phases 1 and 2 - initialized deployment plan, detected Next.js static export configuration, built CDK infrastructure with S3+CloudFront, created deployment script
-Next: Phase 3 - Execute CDK Deployment
+Progress: Completed Phases 1-3 - initialized deployment plan, detected Next.js static export configuration, built CDK infrastructure with S3+CloudFront, created deployment script, deployed successfully to AWS, fixed CloudFront function for static multi-page routing, validated all routes working correctly
+Next: Phase 4 - Finalize documentation and README
