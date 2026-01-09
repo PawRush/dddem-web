@@ -6,7 +6,8 @@ app_name: DDDEMWeb
 app_type: Frontend Application (Next.js Static Export)
 branch: deploy-to-aws
 created: 2026-01-09T23:00:00Z
-last_updated: 2026-01-10T01:30:00Z
+last_updated: 2026-01-10T01:40:00Z
+status: COMPLETE
 ---
 
 # Deployment Plan: DDD East Midlands Web
@@ -34,8 +35,8 @@ Coding Agents should follow this Deployment Plan and validate previous progress 
 - [x] Step 11: Validate CloudFormation Stack
 
 ## Phase 4: Update Documentation
-- [ ] Step 12: Finalize Deployment Plan
-- [ ] Step 13: Update README.md
+- [x] Step 12: Finalize Deployment Plan
+- [x] Step 13: Update README.md
 
 ## Deployment Info
 
@@ -78,9 +79,21 @@ aws cloudformation describe-stacks --stack-name DDDEMWebFrontend-preview-$(whoam
 aws cloudfront create-invalidation --distribution-id [DISTRIBUTION_ID] --paths "/*"
 ```
 
-## Issues Encountered
+## Issues Encountered and Resolved
 
-None yet.
+1. **CloudFront Function Syntax Error** (RESOLVED)
+   - Initial function had incorrect syntax with event.request assignment
+   - Solution: Simplified JavaScript to use var declarations and proper return statements
+
+2. **Root Path Handling** (RESOLVED)
+   - CloudFront function was converting `/` to `//index.html` causing 503 errors
+   - Solution: Added special case for `/` to skip rewriting at root level
+
+3. **Directory Routing for Static Sites** (RESOLVED)
+   - `/path/` wasn't serving `/path/index.html` from S3
+   - Solution: Updated CloudFront function to append `/index.html` to directory-like paths
+
+All issues successfully resolved. Deployment complete and tested with live requests.
 
 ## Session Log
 
