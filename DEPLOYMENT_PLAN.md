@@ -5,7 +5,7 @@ app_name: DDDEMWeb
 app_type: Frontend Application (Next.js Static Export)
 branch: main
 created: 2026-01-21T20:23:00Z
-last_updated: 2026-01-21T20:23:00Z
+last_updated: 2026-01-21T20:32:00Z
 ---
 
 # Deployment Plan: DDDEMWeb
@@ -17,33 +17,46 @@ Coding Agents should follow this Deployment Plan, and validate previous progress
 ## Phase 1: Gather Context and Configure
 - [x] Step 0: Inform User of Execution Flow
 - [x] Step 1: Create Deployment Plan
-- [ ] Step 2: Create Deploy Branch
-- [ ] Step 3: Detect Build Configuration
-- [ ] Step 4: Validate Prerequisites
-- [ ] Step 5: Revisit Deployment Plan
+- [x] Step 2: Create Deploy Branch
+- [x] Step 3: Detect Build Configuration
+- [x] Step 4: Validate Prerequisites
+- [x] Step 5: Revisit Deployment Plan
 
 ## Phase 2: Build CDK Infrastructure
-- [ ] Step 6: Initialize CDK Foundation
-- [ ] Step 7: Generate CDK Stack
-- [ ] Step 8: Create Deployment Script
-- [ ] Step 9: Validate CDK Synth
+- [x] Step 6: Initialize CDK Foundation
+- [x] Step 7: Generate CDK Stack
+- [x] Step 8: Create Deployment Script
+- [x] Step 9: Validate CDK Synth
 
 ## Phase 3: Deploy and Validate
-- [ ] Step 10: Execute CDK Deployment
-- [ ] Step 11: Validate CloudFormation Stack
+- [x] Step 10: Execute CDK Deployment
+- [x] Step 11: Validate CloudFormation Stack
 
 ## Phase 4: Update Documentation
 - [ ] Step 12: Finalize Deployment Plan
 - [ ] Step 13: Update README.md
 
+## Build Configuration
+
+- Framework: Next.js 15.5.7 (static export)
+- Package Manager: npm
+- Build Command: npm run build
+- Output Directory: out/
+- Base Path: / (root)
+- Routing: Static multi-page with trailing slashes
+- Lint Command: npm run lint
+
 ## Deployment Info
 
-- Deployment URL: [after completion]
-- Stack name: [after creation]
-- Distribution ID: [after creation]
-- S3 Bucket Name: [after creation]
-- CloudFront Log Bucket: [after creation]
-- S3 Log Bucket: [after creation]
+- Deployment URL: https://d2bq9i3oubx79u.cloudfront.net
+- Stack name: DDDEMWebFrontend-preview-sergeyka
+- Distribution ID: E12VW5W9NHTBOR
+- S3 Bucket Name: dddemwebfrontend-preview-se-cftos3s3bucketcae9f2be-ydpzbyor7elk
+- CloudFront Log Bucket: dddemwebfrontend-preview--cftos3cloudfrontloggingb-dn4btzeg27bj
+- S3 Log Bucket: dddemwebfrontend-preview--cftos3s3loggingbucket64b-xrgyv0xwhagj
+- Environment: preview-sergeyka
+- Region: us-east-1
+- Deployment timestamp: 2026-01-21T20:40:45Z
 
 ## Recovery Guide
 
