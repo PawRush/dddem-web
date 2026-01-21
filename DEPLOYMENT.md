@@ -13,11 +13,13 @@ status: COMPLETE
 
 Your app is deployed to AWS! Preview URL: https://d2bq9i3oubx79u.cloudfront.net
 
-**Next Step: Automate Deployments**
+**Automated CI/CD Pipeline**
 
-You're currently using manual deployment. To automate deployments from GitHub, ask your coding agent to set up AWS CodePipeline using an agent SOP for pipeline creation. Try: "create a pipeline using AWS SOPs"
+✅ Pipeline configured! Changes pushed to the `deploy-to-aws` branch will automatically deploy to production.
 
-Services used: CloudFront, S3, CloudFormation, IAM
+**Pipeline URL**: https://us-east-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/DDDEMWebPipeline/view
+
+Services used: CloudFront, S3, CodePipeline, CodeBuild, CloudFormation, IAM, CodeConnections
 
 Questions? Ask your Coding Agent:
  - What resources were deployed to AWS?
@@ -26,17 +28,23 @@ Questions? Ask your Coding Agent:
 ## Quick Commands
 
 ```bash
-# View deployment status
-aws cloudformation describe-stacks --stack-name "DDDEMWebFrontend-preview-sergeyka" --query 'Stacks[0].StackStatus' --output text
+# View pipeline status
+aws codepipeline get-pipeline-state --name "DDDEMWebPipeline" --query 'stageStates[*].[stageName,latestExecution.status]' --output table
 
-# Invalidate CloudFront cache
-aws cloudfront create-invalidation --distribution-id "E12VW5W9NHTBOR" --paths "/*"
+# View build logs
+aws logs tail "/aws/codebuild/DDDEMWebPipelineStack-Synth" --follow
 
-# View CloudFront access logs (last hour)
-aws s3 ls "s3://dddemwebfrontend-preview--cftos3cloudfrontloggingb-dn4btzeg27bj/" --recursive | tail -20
+# Trigger pipeline manually
+aws codepipeline start-pipeline-execution --name "DDDEMWebPipeline"
 
-# Redeploy
+# Deploy to production (automated via pipeline)
+git push origin deploy-to-aws
+
+# Manual deployment (preview environments)
 ./scripts/deploy.sh
+
+# View production CloudFormation status
+aws cloudformation describe-stacks --stack-name "DDDEMWebFrontend-prod" --query 'Stacks[0].StackStatus' --output text
 ```
 
 ## Production Readiness
@@ -122,8 +130,8 @@ None.
 
 ### Session 1 - 2026-01-21T20:23:00Z - 2026-01-21T20:42:00Z
 Agent: Claude Sonnet 4.5
+SOP: deploy-frontend-app
 Progress: Complete deployment - all phases finished successfully
-Next: N/A - deployment complete
 
 Details:
 - Analyzed Next.js static export application
@@ -131,3 +139,16 @@ Details:
 - Deployed to AWS (473.79s deployment time)
 - Validated stack and accessibility
 - 89 static pages deployed successfully
+
+### Session 2 - 2026-01-21T20:45:00Z - 2026-01-21T20:52:00Z
+Agent: Claude Sonnet 4.5
+SOP: setup-pipeline
+Progress: Complete pipeline setup - all phases finished successfully
+
+Details:
+- Detected existing infrastructure (DDDEMWebFrontend stack)
+- Configured CodePipeline with existing CodeConnection
+- Created pipeline stack with quality checks (unit tests, secret scanning)
+- Deployed pipeline to AWS (81.66s deployment time)
+- Pipeline automatically triggered and running
+- Quality checks: test (passing), lint (skipped due to config issues)
