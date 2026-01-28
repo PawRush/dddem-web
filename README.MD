@@ -79,3 +79,11 @@ We use ESLinting rules to maintain an unopinionated codebase. You can set this u
 We also use `pretty-quick` via a `husky` git hook which will fix your formatting automatically or warn you if it can't before you commit your work so even if you don't have it on save then this will prevent any errors.
 
 If you manage to push changes bypassing the above then it will also check at the build pipeline to help prevent any mistakes.
+
+## Deployment
+
+Deployed at: https://dfskb73i5m8.cloudfront.net, using the [deploy-frontend-app] Agent Standard Operation Procedure from the [AWS MCP](https://docs.aws.amazon.com/aws-mcp/latest/userguide/what-is-mcp-server.html).
+
+Deployment command: `./scripts/deploy.sh`
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for full details.
