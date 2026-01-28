@@ -10,13 +10,24 @@ completed: 2026-01-28T18:06:00Z
 
 # Deployment Summary
 
-Your app is deployed to AWS! Preview URL: https://d62vf2cjrpj7c.cloudfront.net
+Your app is deployed to AWS with automated CI/CD!
 
-**Next Step: Automate Deployments**
+**Production URL**: Will be available after pipeline completes first deployment
+**Preview URL**: https://d62vf2cjrpj7c.cloudfront.net
+**Pipeline**: https://us-east-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/DDDEMWebPipeline/view
 
-You're currently using manual deployment. To automate deployments from GitHub, ask your coding agent to set up AWS CodePipeline using an agent SOP for pipeline creation. Try: "create a pipeline using AWS SOPs"
+## Automated Deployments
 
-Services used: CloudFront, S3, CloudFormation, IAM
+✅ **Pipeline Active**: Push to `deploy-to-aws-20260128_174824-sergeyka` branch triggers automatic deployment
+
+```bash
+# Deploy changes
+git add .
+git commit -m "your message"
+git push origin deploy-to-aws-20260128_174824-sergeyka
+```
+
+Services used: CodePipeline, CodeBuild, CodeConnections, CloudFront, S3, CloudFormation, IAM
 
 Questions? Ask your Coding Agent:
  - What resources were deployed to AWS?
@@ -34,8 +45,17 @@ aws cloudfront create-invalidation --distribution-id "EW508DACS3HBP" --paths "/*
 # View CloudFront access logs (last hour)
 aws s3 ls "s3://dddemwebfrontend-preview--cftos3cloudfrontloggingb-ti6pjppio3bn/" --recursive | tail -20
 
-# Redeploy
+# Redeploy (manual)
 ./scripts/deploy.sh
+
+# View pipeline status
+aws codepipeline get-pipeline-state --name "DDDEMWebPipeline" --query 'stageStates[*].[stageName,latestExecution.status]' --output table
+
+# View build logs
+aws logs tail "/aws/codebuild/DDDEMWebPipelineStack-Synth" --follow
+
+# Trigger pipeline manually
+aws codepipeline start-pipeline-execution --name "DDDEMWebPipeline"
 ```
 
 ## Production Readiness
@@ -127,3 +147,14 @@ Progress: Complete deployment from scratch
 - Phase 3: Successfully deployed to AWS
 - Phase 4: Finalized documentation
 Status: ✓ COMPLETED
+
+
+### Session 2 - 2026-01-28T18:07:00Z - 2026-01-28T18:13:00Z
+Agent: Claude Sonnet 4.5
+Progress: Complete pipeline setup
+- Phase 1: Detected infrastructure, verified CodeConnection (AVAILABLE)
+- Phase 2: Created and deployed CDK Pipeline with automated CI/CD
+- Phase 3: Updated documentation
+Status: ✓ COMPLETED
+Pipeline: DDDEMWebPipeline (arn:aws:codepipeline:us-east-1:126593893432:DDDEMWebPipeline)
+

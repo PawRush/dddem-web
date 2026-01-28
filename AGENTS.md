@@ -26,11 +26,22 @@ DDDEMWeb is a Next.js static website for DDD East Midlands conference. The site 
 
 ## Deployment
 
-Manual deployment via CDK:
+### Automated Deployment (CI/CD)
+
+Push to `deploy-to-aws-20260128_174824-sergeyka` branch triggers automatic deployment via CodePipeline:
+```bash
+git push origin deploy-to-aws-20260128_174824-sergeyka
+```
+
+Pipeline Console: https://us-east-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/DDDEMWebPipeline/view
+
+### Manual Deployment
+
+Manual deployment via CDK (for preview environments):
 ```bash
 ./scripts/deploy.sh                   # Deploy to preview-$(whoami)
 ./scripts/deploy.sh dev               # Deploy to dev environment
 ./scripts/deploy.sh prod              # Deploy to production
 ```
 
-See DEPLOYMENT.md for full deployment documentation and automation options.
+See DEPLOYMENT.md for full deployment documentation, pipeline details, and troubleshooting.

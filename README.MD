@@ -55,11 +55,13 @@ The `cd out` and run
 
 ## Deployment
 
-Deployed at: https://d62vf2cjrpj7c.cloudfront.net, using the [deploy-frontend-app] Agent Standard Operation Procedure from the [AWS MCP](https://docs.aws.amazon.com/aws-mcp/latest/userguide/what-is-mcp-server.html).
+Deployed to AWS with automated CI/CD pipeline.
 
-Deployment command: `./scripts/deploy.sh`
+**Pipeline**: https://us-east-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/DDDEMWebPipeline/view
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for full details.
+**Deploy**: `git push origin deploy-to-aws-20260128_174824-sergeyka`
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for full details. Created with the [deploy-frontend-app] and [setup-pipeline] Agent Standard Operation Procedures from the [AWS MCP](https://docs.aws.amazon.com/aws-mcp/latest/userguide/what-is-mcp-server.html).
 
 # Branding Guide
 
