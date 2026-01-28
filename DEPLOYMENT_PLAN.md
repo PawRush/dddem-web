@@ -5,7 +5,7 @@ app_name: DDDEMWeb
 app_type: Frontend Application
 branch: deploy-to-aws-20260128_174824-sergeyka
 created: 2026-01-28T17:51:00Z
-last_updated: 2026-01-28T17:51:00Z
+last_updated: 2026-01-28T17:55:00Z
 ---
 
 # Deployment Plan: DDDEMWeb
@@ -15,10 +15,10 @@ Coding Agents should follow this Deployment Plan, and validate previous progress
 **IMPORTANT**: Update this plan after EACH step completes. Mark the step `[x]` and update `last_updated` timestamp.
 
 ## Phase 1: Gather Context and Configure
-- [ ] Step 0: Inform User of Execution Flow
-- [ ] Step 1: Create Deployment Plan
-- [ ] Step 2: Create Deploy Branch
-- [ ] Step 3: Detect Build Configuration
+- [x] Step 0: Inform User of Execution Flow
+- [x] Step 1: Create Deployment Plan
+- [x] Step 2: Create Deploy Branch
+- [x] Step 3: Detect Build Configuration
 - [ ] Step 4: Validate Prerequisites
 - [ ] Step 5: Revisit Deployment Plan
 - [ ] Phase 1 Checkpoint
@@ -51,13 +51,14 @@ Coding Agents should follow this Deployment Plan, and validate previous progress
 
 ## Build Configuration
 
-- Framework: [to be detected]
-- Package manager: [to be detected]
-- Build command: [to be detected]
-- Output directory: [to be detected]
-- Base path: [to be detected]
-- Entry point: [to be detected]
-- Lint command: [to be detected]
+- Framework: Next.js (static export with trailingSlash: true)
+- Package manager: npm
+- Build command: npm run build
+- Output directory: out/
+- Base path: / (root)
+- Entry point: index.html
+- Lint command: npm run lint
+- CloudFront config: URL rewrite function (/path -> /path/index.html)
 
 ## Recovery Guide
 
@@ -78,5 +79,5 @@ None.
 
 ### Session 1 - 2026-01-28T17:51:00Z
 Agent: Claude Sonnet 4.5
-Progress: Created deployment plan
-Next: Create deploy branch
+Progress: Created deployment plan, branch, detected build config (Next.js static export, npm, out/)
+Next: Validate prerequisites
