@@ -31,9 +31,9 @@ Coding Agents should follow this Deployment Plan, and validate previous progress
 - [x] Phase 2 Checkpoint
 
 ## Phase 3: Deploy and Validate
-- [ ] Step 10: Execute CDK Deployment
-- [ ] Step 11: Validate CloudFormation Stack
-- [ ] Phase 3 Checkpoint
+- [x] Step 10: Execute CDK Deployment
+- [x] Step 11: Validate CloudFormation Stack
+- [x] Phase 3 Checkpoint
 
 ## Phase 4: Update Documentation
 - [ ] Step 12: Finalize Deployment Plan
@@ -42,12 +42,13 @@ Coding Agents should follow this Deployment Plan, and validate previous progress
 
 ## Deployment Info
 
-- Deployment URL: [pending]
-- Stack name: [pending]
-- Distribution ID: [pending]
-- S3 bucket name: [pending]
-- S3 log bucket: [pending]
-- CloudFront log bucket: [pending]
+- Deployment URL: https://d62vf2cjrpj7c.cloudfront.net
+- Stack name: DDDEMWebFrontend-preview-sergeyka
+- Distribution ID: EW508DACS3HBP
+- S3 bucket name: dddemwebfrontend-preview-se-cftos3s3bucketcae9f2be-a7j1jwjlqogh
+- S3 log bucket: dddemwebfrontend-preview--cftos3s3loggingbucket64b-9aljjint92z9
+- CloudFront log bucket: dddemwebfrontend-preview--cftos3cloudfrontloggingb-ti6pjppio3bn
+- Deployment timestamp: 2026-01-28T18:05:00Z
 
 ## Build Configuration
 
