@@ -82,8 +82,8 @@ If you manage to push changes bypassing the above then it will also check at the
 
 ## Deployment
 
-Deployed at: https://dfskb73i5m8.cloudfront.net, using the [deploy-frontend-app] Agent Standard Operation Procedure from the [AWS MCP](https://docs.aws.amazon.com/aws-mcp/latest/userguide/what-is-mcp-server.html).
+Pipeline: https://us-east-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/DddemPipeline/view
 
-Deployment command: `./scripts/deploy.sh`
+Deploy: `git push origin deploy-to-aws-20260128_161953-sergeyka`
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for full details.
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for full details. Created with the [setup-pipeline] Agent Standard Operation Procedure from the [AWS MCP](https://docs.aws.amazon.com/aws-mcp/latest/userguide/what-is-mcp-server.html).
