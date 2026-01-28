@@ -16,13 +16,14 @@ url_rewrite_type: urlRewriteFunction
 
 # Deployment Summary
 
-Your app is deployed to AWS! Preview URL: https://dfskb73i5m8.cloudfront.net
+Your app has a CodePipeline pipeline. Changes on GitHub branch deploy-to-aws-20260128_161953-sergeyka will be deployed automatically. This is managed by CloudFormation stack DddemPipelineStack.
 
-**Next Step: Automate Deployments**
+Pipeline console: https://us-east-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/DddemPipeline/view
 
-You're currently using manual deployment. To automate deployments from GitHub, ask your coding agent to set up AWS CodePipeline using an agent SOP for pipeline creation. Try: "create a pipeline using AWS SOPs"
+Production URL (deployed via pipeline): Will be available after first pipeline run completes
+Preview URL (manual deployment): https://dfskb73i5m8.cloudfront.net
 
-Services used: CloudFront, S3, CloudFormation, IAM
+Services used: CodePipeline, CodeBuild, CodeConnections, CloudFront, S3, CloudFormation, IAM
 
 Questions? Ask your Coding Agent:
  - What resources were deployed to AWS?
@@ -31,16 +32,19 @@ Questions? Ask your Coding Agent:
 ## Quick Commands
 
 ```bash
-# View deployment status
+# View pipeline status
+aws codepipeline get-pipeline-state --name "DddemPipeline" --query 'stageStates[*].[stageName,latestExecution.status]' --output table
+
+# View build logs
+aws logs tail "/aws/codebuild/DddemPipelineStack-Synth" --follow
+
+# Trigger pipeline manually
+aws codepipeline start-pipeline-execution --name "DddemPipeline"
+
+# View preview deployment status (manual deployments)
 aws cloudformation describe-stacks --stack-name "dddemFrontend-preview-sergeyka" --query 'Stacks[0].StackStatus' --output text
 
-# Invalidate CloudFront cache
-aws cloudfront create-invalidation --distribution-id "E1XFSUXPEBDO6Z" --paths "/*"
-
-# View CloudFront access logs (last hour)
-aws s3 ls "s3://dddemfrontend-preview-ser-cftos3cloudfrontloggingb-1izczb9y00fx/" --recursive | tail -20
-
-# Redeploy
+# Manual redeploy to preview environment
 ./scripts/deploy.sh
 ```
 
@@ -127,3 +131,40 @@ Progress: Completed full deployment (all 4 phases)
 - Phase 3: Deployed to AWS successfully
 - Phase 4: Finalized documentation
 Next: N/A - Deployment complete
+
+### Session 2 - 2026-01-28T16:45:00
+Agent: Claude Sonnet 4.5
+Progress: Completed pipeline setup (all 3 phases)
+- Phase 1: Detected infrastructure, used existing CodeConnection
+- Phase 2: Created pipeline stack, deployed to AWS
+- Phase 3: Finalized documentation
+Pipeline: DddemPipeline running on branch deploy-to-aws-20260128_161953-sergeyka
+Next: N/A - Pipeline complete
+
+---
+
+# Pipeline Deployment Plan
+
+## Pipeline Info
+
+- Pipeline Name: DddemPipeline
+- Pipeline ARN: arn:aws:codepipeline:us-east-1:126593893432:DddemPipeline
+- Pipeline Stack: DddemPipelineStack
+- CodeConnection ARN: arn:aws:codeconnections:us-east-1:126593893432:connection/c140aa0c-7407-42c9-aa4b-7c81f5faf40b
+- Repository: PawRush/dddem-web
+- Branch: deploy-to-aws-20260128_161953-sergeyka
+- Quality checks: test (passing, included), lint (failing, excluded)
+- Pipeline URL: https://us-east-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/DddemPipeline/view
+- Deployment Timestamp: 2026-01-28T16:48:02
+
+## Pipeline Recovery Guide
+
+```bash
+# Rollback pipeline
+cd infra
+npm run destroy:pipeline
+
+# Redeploy pipeline
+cd infra
+npm run deploy:pipeline
+```
