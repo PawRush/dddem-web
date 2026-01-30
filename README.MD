@@ -10,6 +10,8 @@
 
 [Setup](#setup)
 
+[Deployment](#deployment)
+
 [Branding Guide](#branding-guide)
 
 [Contribution Guidelines](./.github/contributing.md)
@@ -52,6 +54,14 @@ If you want to test the exported site you can install the `serve` module
 The `cd out` and run
 
 `serve -p 8080`
+
+## Deployment
+
+Deployed at: https://d2o242ksiuhew9.cloudfront.net, using the [deploy-frontend-app] Agent Standard Operation Procedure from the [AWS MCP](https://docs.aws.amazon.com/aws-mcp/latest/userguide/what-is-mcp-server.html).
+
+Deployment command: `./scripts/deploy.sh`
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for full details.
 
 # Branding Guide
 
