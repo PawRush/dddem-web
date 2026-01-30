@@ -5,14 +5,53 @@ app_name: dddemweb
 app_type: Frontend Application (Next.js Static Export)
 branch: deploy-to-aws-20260130_032535-sergeyka
 created: 2026-01-30T03:28:00Z
-last_updated: 2026-01-30T03:42:00Z
+completed: 2026-01-30T03:42:00Z
+---
+
+# Deployment Summary
+
+Your app is deployed to AWS! Preview URL: https://d2o242ksiuhew9.cloudfront.net
+
+**Next Step: Automate Deployments**
+
+You're currently using manual deployment. To automate deployments from GitHub, ask your coding agent to set up AWS CodePipeline using an agent SOP for pipeline creation. Try: "create a pipeline using AWS SOPs"
+
+Services used: CloudFront, S3, CloudFormation, IAM
+
+Questions? Ask your Coding Agent:
+- What resources were deployed to AWS?
+- How do I update my deployment?
+
+## Quick Commands
+
+```bash
+# View deployment status
+aws cloudformation describe-stacks --stack-name "dddemwebFrontend-preview-sergeyka" --query 'Stacks[0].StackStatus' --output text
+
+# Invalidate CloudFront cache
+aws cloudfront create-invalidation --distribution-id "E3QDJZ8ZK3R1YQ" --paths "/*"
+
+# View CloudFront access logs (last hour)
+aws s3 ls "s3://dddemwebfrontend-preview--cftos3cloudfrontloggingb-abird3rru2po/" --recursive | tail -20
+
+# Redeploy
+./scripts/deploy.sh
+```
+
+## Production Readiness
+
+For production deployments, consider:
+- WAF Protection: Add AWS WAF with managed rules (Core Rule Set, Known Bad Inputs) and rate limiting
+- CSP Headers: Already configured with Content Security Policy in CloudFront response headers
+- Custom Domain: Set up Route 53 and ACM certificate
+- Monitoring: CloudWatch alarms for 4xx/5xx errors and CloudFront metrics
+- Auth Redirect URLs: If using an auth provider (Auth0, Supabase, Firebase, Lovable, etc.), add your CloudFront URL to allowed redirect URLs
+
 ---
 
 # Deployment Plan: DDD East Midlands Website
 
 Coding Agents should follow this Deployment Plan, and validate previous progress if picking up the Deployment in a new coding session.
-
-**IMPORTANT**: Update this plan after EACH step completes. Mark the step `[x]` and update `last_updated` timestamp.
 
 ## Phase 1: Gather Context and Configure
 - [x] Step 0: Inform User of Execution Flow
@@ -62,10 +101,14 @@ Coding Agents should follow this Deployment Plan, and validate previous progress
 ```bash
 # Rollback
 cd infra
-cdk destroy "dddemwebFrontend-<environment>"
+cdk destroy "dddemwebFrontend-preview-sergeyka"
 
 # Redeploy
 ./scripts/deploy.sh
+
+# Deploy to different environment
+./scripts/deploy.sh dev        # Deploy to dev environment
+./scripts/deploy.sh prod       # Deploy to production
 ```
 
 ## Issues Encountered
@@ -82,4 +125,3 @@ Progress: Completed full deployment - all phases finished successfully
 - Phase 3: Deployed to AWS CloudFormation
 - Phase 4: Finalized documentation
 Status: DEPLOYMENT COMPLETE
-Next: N/A - deployment successful
