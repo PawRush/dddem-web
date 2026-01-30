@@ -5,7 +5,7 @@ app_name: dddemweb
 app_type: Frontend Application (Next.js Static Export)
 branch: deploy-to-aws-20260130_032535-sergeyka
 created: 2026-01-30T03:28:00Z
-last_updated: 2026-01-30T03:35:00Z
+last_updated: 2026-01-30T03:42:00Z
 ---
 
 # Deployment Plan: DDD East Midlands Website
@@ -29,8 +29,8 @@ Coding Agents should follow this Deployment Plan, and validate previous progress
 - [x] Step 9: Validate CDK Synth
 
 ## Phase 3: Deploy and Validate
-- [ ] Step 10: Execute CDK Deployment
-- [ ] Step 11: Validate CloudFormation Stack
+- [x] Step 10: Execute CDK Deployment
+- [x] Step 11: Validate CloudFormation Stack
 
 ## Phase 4: Update Documentation
 - [ ] Step 12: Finalize Deployment Plan
@@ -47,12 +47,15 @@ Coding Agents should follow this Deployment Plan, and validate previous progress
 - Routing: Static multi-page with /path/index.html structure
 - CloudFront Function: URL rewrite function (rewrites /path to /path/index.html)
 - Linter: ESLint (npm run lint)
-- Deployment URL: [after completion]
-- Stack Name: [after creation]
-- Distribution ID: [after creation]
-- S3 Bucket Name: [after creation]
-- S3 Log Bucket: [after creation]
-- CloudFront Log Bucket: [after creation]
+- Deployment URL: https://d2o242ksiuhew9.cloudfront.net
+- Stack Name: dddemwebFrontend-preview-sergeyka
+- Distribution ID: E3QDJZ8ZK3R1YQ
+- Distribution Domain: d2o242ksiuhew9.cloudfront.net
+- S3 Bucket Name: dddemwebfrontend-preview-se-cftos3s3bucketcae9f2be-sbyqvkwgtw6e
+- S3 Log Bucket: dddemwebfrontend-preview--cftos3s3loggingbucket64b-stbagon9tm6v
+- CloudFront Log Bucket: dddemwebfrontend-preview--cftos3cloudfrontloggingb-abird3rru2po
+- Deployment Timestamp: 2026-01-30T03:41:25Z
+- Environment: preview-sergeyka
 
 ## Recovery Guide
 
