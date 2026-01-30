@@ -38,6 +38,7 @@ Coding Agents should follow this Deployment Plan, and validate previous progress
 
 ## Deployment Info
 
+### Manual Deployment (preview)
 - Framework: Next.js with static export (trailingSlash: true)
 - Package Manager: npm
 - Build Command: npm run build
@@ -46,7 +47,8 @@ Coding Agents should follow this Deployment Plan, and validate previous progress
 - Entry Point: index.html
 - Routing: Static multi-page with /path/index.html structure
 - CloudFront Function: URL rewrite function (rewrites /path to /path/index.html)
-- Linter: ESLint (npm run lint)
+- Linter: ESLint (npm run lint) - excluded from pipeline (failing)
+- Unit Tests: jest (npm run test) - included in pipeline (passing)
 - Deployment URL: https://d2o242ksiuhew9.cloudfront.net
 - Stack Name: dddemwebFrontend-preview-sergeyka
 - Distribution ID: E3QDJZ8ZK3R1YQ
@@ -56,6 +58,16 @@ Coding Agents should follow this Deployment Plan, and validate previous progress
 - CloudFront Log Bucket: dddemwebfrontend-preview--cftos3cloudfrontloggingb-abird3rru2po
 - Deployment Timestamp: 2026-01-30T03:41:25Z
 - Environment: preview-sergeyka
+
+### CI/CD Pipeline (production)
+- Pipeline Name: dddemwebPipeline
+- Pipeline ARN: arn:aws:codepipeline:us-east-1:126593893432:dddemwebPipeline
+- Repository: PawRush/dddem-web
+- Branch: deploy-to-aws-20260130_032535-sergeyka
+- CodeConnection ARN: arn:aws:codeconnections:us-east-1:126593893432:connection/c140aa0c-7407-42c9-aa4b-7c81f5faf40b
+- CodeConnection Status: AVAILABLE
+- Production Stack: dddemwebFrontend-prod
+- Pipeline URL: https://us-east-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/dddemwebPipeline/view
 
 ## Recovery Guide
 

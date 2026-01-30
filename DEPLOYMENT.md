@@ -10,19 +10,39 @@ completed: 2026-01-30T03:42:00Z
 
 # Deployment Summary
 
-Your app is deployed to AWS! Preview URL: https://d2o242ksiuhew9.cloudfront.net
+Your app is deployed to AWS with automated CI/CD!
 
-**Next Step: Automate Deployments**
+**Manual Preview:** https://d2o242ksiuhew9.cloudfront.net (preview-sergeyka environment)
 
-You're currently using manual deployment. To automate deployments from GitHub, ask your coding agent to set up AWS CodePipeline using an agent SOP for pipeline creation. Try: "create a pipeline using AWS SOPs"
+**Production Pipeline:** Automatic deployment from `deploy-to-aws-20260130_032535-sergeyka` branch
+- Pipeline: https://us-east-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/dddemwebPipeline/view
+- Deploy: `git push origin deploy-to-aws-20260130_032535-sergeyka`
 
-Services used: CloudFront, S3, CloudFormation, IAM
+Services used: CodePipeline, CodeBuild, CodeConnections, CloudFront, S3, CloudFormation, IAM
 
 Questions? Ask your Coding Agent:
 - What resources were deployed to AWS?
 - How do I update my deployment?
 
 ## Quick Commands
+
+### Pipeline Commands
+
+```bash
+# Check pipeline status
+aws codepipeline get-pipeline-state --name dddemwebPipeline
+
+# View build logs
+aws logs tail "/aws/codebuild/dddemwebPipeline" --follow
+
+# Trigger pipeline manually
+aws codepipeline start-pipeline-execution --name dddemwebPipeline
+
+# Deploy via git push (automatic)
+git push origin deploy-to-aws-20260130_032535-sergeyka
+```
+
+### Manual Deployment Commands
 
 ```bash
 # View deployment status
@@ -34,7 +54,7 @@ aws cloudfront create-invalidation --distribution-id "E3QDJZ8ZK3R1YQ" --paths "/
 # View CloudFront access logs (last hour)
 aws s3 ls "s3://dddemwebfrontend-preview--cftos3cloudfrontloggingb-abird3rru2po/" --recursive | tail -20
 
-# Redeploy
+# Manual redeploy (preview environment)
 ./scripts/deploy.sh
 ```
 
